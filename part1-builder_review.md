@@ -47,13 +47,13 @@ This will bring you to the entry point of the builder. We will now bein the code
 
 You should be at `BuildEXE`, which is at `00403204`.
 
-    If you're lost, simply press the `G` key, enter `00403204`, and hit enter. You will now be in lock-step with us.
+    - If you're lost, simply press the `G` key, enter `00403204`, and hit enter. You will now be in lock-step with us.
     
 1. At `00403257`, the config file is read from disk.
 
 2. At `00403287`, the public key file is read from disk.
 
-    Please note that both the config and key file have been created/set prior to the lab.
+    - Please note that both the config and key file have been created/set prior to the lab.
 
 # Pulling the template from resources
     
