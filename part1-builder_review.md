@@ -14,7 +14,7 @@ In this section, we're going to open and configure as required for the workshop.
 
     The above steps walk you through opening the provided (and commented!) project and set the left-click option to highlight variables throughout the code.
 
-## Begin code review
+## Begin Code Review
 
 1. To begin code review, in the left-hand nav menu, find the `Symbol Tree` area, expand the `Exports` folder, and double-click on `entry`.
 
@@ -56,7 +56,7 @@ You should be at `BuildEXE`, which is at `0x00403204`.
 1. At `0x00403287`, the public key file is read from disk.
     - Please note that both the config and key file have been created/set prior to the lab.
 
-## Pulling the template from resources
+## Pulling the Template from Resources
     
 1. At `0x0040342a`, `GetModuleHandleW` is called with a parameter of `0x0`, which mean sit will returns the module handle to the current process -- i.e. the builder itself
 
@@ -72,13 +72,13 @@ You should be at `BuildEXE`, which is at `0x00403204`.
 
     Double click this address to enter the function where the fun passcode stuff occurs.
 
-## Generating the passcode    
+## Generating the Passcode    
 
 1. At `0x0040273a`, CreatePasscode() is called. When this returns, the passcode will be in the array argument passed to the function.
 
     From here, multiple levels of processing occur. We will not have time to delve into these further.
     
-## Writing files
+## Writing Files
 
 1. At `0x00403523`, the output file string is built.
 
@@ -92,6 +92,92 @@ You should be at `BuildEXE`, which is at `0x00403204`.
 
 Let's debug this bad boy!!
 
-1. Double-click `x32dbg` on the Desktop.
+## Configuring the Debugger
 
-1. 
+1. Double-click `x32dbg.exe` on the Desktop.
+
+1. Choose `File -> Open` and select `C:\Users\LegitUser\Desktop\LBLeak\builder.exe`.
+
+1. Choose `File -> Change Command Line`.
+
+    Once the dialogue box opens, enter the following into the field. Clear out everything first, then paste this in:
+    
+    `"C:\Users\LegitUser\Desktop\LBLeak\builder.exe" -type enc -exe -pass -pubkey pub.key -config config.json -ofile LB3-dc32.exe`
+    
+    The above tells the debugger to use the provided arguments with the builder:
+    
+    1. `-type enc`: We're going to create an encryptor
+    
+    1. `-exe`: We're going to create an EXE (not a DLL).
+    
+    1. `-pass`: We're going to generate a passcode required to run the compiled ransomware binary.
+    
+    1. `-pubkey pub.key`: We're going to use a pre-generate key called `pub.key`
+    
+    1. `-config config.json`: We're going to use the `config.json` configuratoin file.
+    
+    1. `-ofile LB3-dc32.exe`: We're going to output the compiled ransomware binary using the name `LB3-dc32.exe`.
+    
+## Set Breakpoints
+
+Now that we've set up the debugger, we need to set our breakpoints for analysis.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `4034BC` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    We have now set our first breakpoint. We will continue this process for the remaining breakpoints.
+    
+    The breakpoint we have just set is for the call to `memcpy`, where the EXE resource is written into a newly-created buffer.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `4034F3` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to `GeneratePasscode()`, which is the function master function that takes care of passcode generation.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `403523` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to the function that builds the output file string.
+    
+1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `403523` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to the function that builds the passcode output file name.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `403582` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to the function that writes the passcode file to disk.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `4035b4` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to the function that writes the ransomware binary to disk.
+
+## Delete Pre-Existing Files
+
+In Explorer, go to `C:\Users\LegitUser\Desktop\LBLeak\` and delete the following files if they exist:
+
+    1. `LB3-dc32.exe`
+
+    1. `LB3-dc32.exe-Password_exe.txt`
+
+Now that we are sure neither the compiled binary nor the password file exist on disk, let's begin our debugging.
+
+## Begin Debugging
+
+Now it's time to debug! Let's get to it!
+
+1. Hit `F9`
+
+    
