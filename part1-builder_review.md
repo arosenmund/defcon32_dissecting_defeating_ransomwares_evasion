@@ -140,29 +140,39 @@ Now that we've set up the debugger, we need to set our breakpoints for analysis.
 
     The breakpoint we have just set is for the call to `GeneratePasscode()`, which is the function master function that takes care of passcode generation.
 
-1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `403523` and hit enter.
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `403523` and hit enter.
 
 1. Press `F2` to set a breakpoint
 
     The breakpoint we have just set is for the call to the function that builds the output file string.
     
-1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `403523` and hit enter.
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `403523` and hit enter.
 
 1. Press `F2` to set a breakpoint
 
     The breakpoint we have just set is for the call to the function that builds the passcode output file name.
 
-1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `403582` and hit enter.
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `403582` and hit enter.
 
 1. Press `F2` to set a breakpoint
 
     The breakpoint we have just set is for the call to the function that writes the passcode file to disk.
 
-1. Press `Ctrl + G` to open the `Enter expression to follow` window. In the window, enter `4035b4` and hit enter.
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `4035b4` and hit enter.
 
 1. Press `F2` to set a breakpoint
 
     The breakpoint we have just set is for the call to the function that writes the ransomware binary to disk.
+
+All breakpoints have been set!
 
 ## Delete Pre-Existing Files
 
