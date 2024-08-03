@@ -118,7 +118,25 @@ Let's debug this bad boy!!
     
     1. `-ofile LB3-dc32.exe`: We're going to output the compiled ransomware binary using the name `LB3-dc32.exe`.
     
-## Set Breakpoints
+## Import x32bg Database
+
+Rather than set breakpoints manually, since we won't have much time to do this in class, we have pre-set breakpoints. To load them, you will want to load the x32bg database for the `builder.exe` app. You can do so by:
+
+1. Choose `File -> DERP`.
+
+    Select `DERP`.
+    
+Now let's check that our breakpoints are in order.
+
+1. Choose `View -> DERP`
+
+You should see the following:
+
+
+
+## OPTIONAL: Set Breakpoints Manually
+
+We will _not_ be doing this during the workshop. BUT, if you wanted to set the breakpoints yourself, you could use the following instructions :).
 
 Now that we've set up the debugger, we need to set our breakpoints for analysis.
 
@@ -131,6 +149,22 @@ Now that we've set up the debugger, we need to set our breakpoints for analysis.
     We have now set our first breakpoint. We will continue this process for the remaining breakpoints.
     
     The breakpoint we have just set is for the call to `memcpy`, where the EXE resource is written into a newly-created buffer.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `XXXXXX` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to the function that obfuscates the template loaded into memory.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `4034F3` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to `GeneratePasscode()`, which is the function master function that takes care of passcode generation.
 
 1. Press `Ctrl + G` to open the `Enter expression to follow` window.
 
@@ -150,7 +184,7 @@ Now that we've set up the debugger, we need to set our breakpoints for analysis.
     
 1. Press `Ctrl + G` to open the `Enter expression to follow` window.
 
-    In the window, enter `403523` and hit enter.
+    In the window, enter `403543` and hit enter.
 
 1. Press `F2` to set a breakpoint
 
@@ -188,6 +222,20 @@ Now that we are sure neither the compiled binary nor the password file exist on 
 
 Now it's time to debug! Let's get to it!
 
-1. Hit `F9`
+1. Hit `F9`.
+
+    The debugger will stop at our first breakpoint, `0x004034BC`.
+
+1. Select the top of the stack, right-click, and choose `Follow DWORD in Dump -> Dump 1`.
+
+    You will see that the bottom-left side of the screen now shows a bunch of zeroes. Your address will vary from everyone else's in the workshop, including mine, as the buffer that was created will be different on all machines.
+    
+1. Hit `F8`.
+
+    You will now notice an `MZ` header in the Dump window. This is because `memcpy` was just calld, and resource `101`/`0x65` (the EXE template) has now been written to the buffer.
+    
+    The builder has now pulled the raw template from the resources and written it to memory. Good start!
+    
+1. Hit `F9` to reach out next breakpoint.
 
     
