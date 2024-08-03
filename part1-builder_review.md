@@ -5,7 +5,7 @@ In this section, we're going to open and configure as required for the workshop.
 1. Double-click `ghidraRun.bat` on the desktop
  - Once Ghidra opens, you'll be at the Project window
 1. Open the provided Ghidra project by choosing `File > Open Project`. Navigate to `Home > Documents > ghidra_projects > lb3builder.gpr` and select to open the project.
-1. Double-click on the `builder.exe` file in the recently-opened project.
+1. Double-click on the `builder.exe` file in the recently-opened project
 1. Select the `Edit` menu and select `Tool Options`
 1. From the left-hand nav menu, expand `Listing Fields`
 1. Choose `Cursor text highlight` in this menu
@@ -178,9 +178,9 @@ All breakpoints have been set!
 
 In Explorer, go to `C:\Users\LegitUser\Desktop\LBLeak\` and delete the following files if they exist:
 
-    1. `LB3-dc32.exe`
+1. `LB3-dc32.exe`
 
-    1. `LB3-dc32.exe-Password_exe.txt`
+1. `LB3-dc32.exe-Password_exe.txt`
 
 Now that we are sure neither the compiled binary nor the password file exist on disk, let's begin our debugging.
 
