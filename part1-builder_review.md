@@ -122,17 +122,25 @@ Let's debug this bad boy!!
 
 Rather than set breakpoints manually, since we won't have much time to do this in class, we have pre-set breakpoints. To load them, you will want to load the x32bg database for the `builder.exe` app. You can do so by:
 
-1. Choose `File -> DERP`.
+1. Choose `File -> Database -> Import database`.
 
-    Select `DERP`.
+    Select `C:\Users\LegitUser\Desktop\LBLeak\builder.dd32` and hit `Open`.
+    
+    We've now imported our database for `builder.exe`, which should include all of our pre-configured breakpoints.
     
 Now let's check that our breakpoints are in order.
 
-1. Choose `View -> DERP`
+1. Choose `View -> Breakpoints` (or hit `Alt + B`).
 
 You should see the following:
 
+[screenshot]
 
+If your breakpoints look like the above, great! If not, whoops!
+
+1. Choose `View -> CPU` (or hit `Alt + C`).
+
+You should be back in the debugger window looking at the code we want to debug.
 
 ## OPTIONAL: Set Breakpoints Manually
 
@@ -152,7 +160,7 @@ Now that we've set up the debugger, we need to set our breakpoints for analysis.
 
 1. Press `Ctrl + G` to open the `Enter expression to follow` window.
 
-    In the window, enter `XXXXXX` and hit enter.
+    In the window, enter `4034da` and hit enter.
 
 1. Press `F2` to set a breakpoint
 
@@ -165,6 +173,14 @@ Now that we've set up the debugger, we need to set our breakpoints for analysis.
 1. Press `F2` to set a breakpoint
 
     The breakpoint we have just set is for the call to `GeneratePasscode()`, which is the function master function that takes care of passcode generation.
+
+1. Press `Ctrl + G` to open the `Enter expression to follow` window.
+
+    In the window, enter `40273A` and hit enter.
+
+1. Press `F2` to set a breakpoint
+
+    The breakpoint we have just set is for the call to `DERP()`, which generates the actual passcode that will be used.
 
 1. Press `Ctrl + G` to open the `Enter expression to follow` window.
 
@@ -214,7 +230,7 @@ In Explorer, go to `C:\Users\LegitUser\Desktop\LBLeak\` and delete the following
 
 1. `LB3-dc32.exe`
 
-1. `LB3-dc32.exe-Password_exe.txt`
+1. `LB3-dc32.exePassword_exe.txt`
 
 Now that we are sure neither the compiled binary nor the password file exist on disk, let's begin our debugging.
 
@@ -230,6 +246,8 @@ Now it's time to debug! Let's get to it!
 
     You will see that the bottom-left side of the screen now shows a bunch of zeroes. Your address will vary from everyone else's in the workshop, including mine, as the buffer that was created will be different on all machines.
     
+    Keep your eye on the Dump section and then:
+    
 1. Hit `F8`.
 
     You will now notice an `MZ` header in the Dump window. This is because `memcpy` was just calld, and resource `101`/`0x65` (the EXE template) has now been written to the buffer.
@@ -238,4 +256,61 @@ Now it's time to debug! Let's get to it!
     
 1. Hit `F9` to reach out next breakpoint.
 
+    Keep your eye on the Dump section and then:
     
+1. Hit `F8` to step over the function call.
+
+    You'll notice that the EXE template has now been replaced.
+    
+1. Hit `F9` to hit our next breakpoint.
+
+1. Hit `F7` to enter the `GeneratePasscode()` function.
+
+1. Hit `F9` to hit our next breakpoint.
+
+    This is where the passcode will be generated.
+
+1. Hit `F8` to step over the passcode-generating function.
+
+    Look two lines above. There's our generated passcode!
+    
+    Your passcode will differ from everyone else's in the class. This is because the random seed that was generated to produce this passcode was pseudo-generated based on machine statistics from your VM.
+    
+1. Hit `F9` to hit our next breakpoint.
+
+    This is where the output filename is built.
+    
+1. Hit `F8` to step over the filename-building function.
+
+    Look two lines down. You'll see the string `LB3-dc32.exe`. This will be the final payload filename.
+    
+1. Hit `F9` to hit our next breakpoint.
+
+    This is where the passcode filename is built.
+    
+1. Hit `F8` to step over the passcode name building function.
+
+    Look two lines up. You'll see the string `LB3-dc32.exePassword_exe.txt`. This will be the name of the passcode file that will be written to disk.
+
+1. Hit `F9` to hit our next breakpoint.
+
+    This is where the passcode file is written to disk.
+    
+1. Hit `F8` to step over the passcode file writing function.
+
+    Once you've stepped over this function, check the `C:\Users\LegitUser\Desktop\LBLeak\` folder. You will now see a passcode will with the name `LB3-dc32.exePassword_exe.txt`. Open this file in Notepad++.
+    
+    We will review this file as a group.
+    
+1. Go back to x32dbg and hit `F9` to hit our next breakpoint.
+
+    This is where the ransomware binary is written to disk.
+
+1. Hit `F8` to step over the ransomware payload file writing function.
+
+    Once you've stepped over this function, check the `C:\Users\LegitUser\Desktop\LBLeak\` folder. You will now see that the builder has created the ransomware binary.
+    
+That's it! We've walked through the building process and have witnessed both the passcode and ransomware binary files being written to disk.
+
+BOOM! We have completed part 1 of the workshop!
+::: sigh of relief :::
