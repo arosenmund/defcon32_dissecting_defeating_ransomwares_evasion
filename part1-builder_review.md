@@ -312,5 +312,7 @@ Now it's time to debug! Let's get to it!
     
 That's it! We've walked through the building process and have witnessed both the passcode and ransomware binary files being written to disk.
 
+1. Close `x32dbg`. The debugger will shut down and you will now be prepared for round 2 of the workshop.
+
 BOOM! We have completed part 1 of the workshop!
 ::: sigh of relief :::
