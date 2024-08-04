@@ -134,7 +134,7 @@ Now let's check that our breakpoints are in order.
 
 You should see the following:
 
-[screenshot]
+![ScreenShot](part1-x32dbg_breakpoints.png)
 
 If your breakpoints look like the above, great! If not, whoops!
 
