@@ -1,3 +1,30 @@
+# Initial Setup
+
+To begin, start your lab as we covered before this section.
+
+Once the lab has started, launch the Windows VM.
+
+Once the VM had loaded, it will take ~10 minutes for the files to appear on the desktop. Once everything is loaded in, you'll have the following on the desktop:
+
+- `ghidra_11.1.1_PUBLIC` folder
+- `pluginsdk` folder
+- `release` folder (this is x64/32dbg)
+- `LAB_FILES` folder
+
+Your desktop should look similar to the following once fully loaded:
+
+![ScreenShot](part1-desktop_loaded.png)
+
+## Extracting Lab Files
+
+Before we can begin, we need to extract our lab files. The process is simple:
+
+1. On the Desktop, open the `LAB_FILES` folder
+
+1. In this folder, right-click on `dc32_workshop_files-part1` and choose `Extract All..."
+
+1. 
+
 # Ghidra Analysis
 
 In this section, we're going to open and configure as required for the workshop.
