@@ -56,10 +56,10 @@ Get-MpComputerStatus
 1. Now run `.\dumplsass-evade.exe`
 > This is not detected my defender for the strings in the file, nor is it caugh at run time. Simply by changing a few lines...it is however hanging.
 1. Exit the powershell window, the whole system is hanging, so you need to close the window to get functions back.
-1. Now, chec the expected output. In the CMD console run the following `dir c:\Users\Public` 
+1. Now, check the expected output. In the CMD console run the following `dir c:\Users\Public` 
 > Here you will find lp.dump with 0 bytes.  The code accessed the PID, but when going to create the file it has to load the contents of the process into a memory buffer. Windows defender recognizes the contents of it's own LSASS process with defender signatures and will block that activity on the event of it trying to be written to a file.
 1. In CMD console, get into a powershell prompt.  `powershell`
-1. Run `get-mpthreate`
+1. Run `get-mpthreat`
 > You will see there are no additional detections than from the previous detection of the file writes.
 
 
