@@ -84,18 +84,20 @@ Anti-Virus is one thing, but the next issue for malware arises at runtime, or wo
 1. In the left hand navigation open 2-api-hashing>api-call2.c
 > Walk through the code, starting on line 47, "main" you can see the comments for the the various API's being called directly. As in, because we linked them by loading the windows.h file with the include statement.  This is the code that is executed in the api-calls.exe file you just ran. These then show up in clear text in the exe, which can be used as signatures, and provide information about what the exe is/can do for your RE.
 1. To avoid this, we need to obfuscate how we call those API's from the libraries already loaded in memory on the system. Open the api-hash-gen-constant.py
-1. 
+> For any API functions you need to call, you can use this to calculate the hashes. You should change the seed hash. You could make it a different seed for each, just like the builder. For the sake of teaching this, that is not what we are going to do. Line 22 has the "hash value" that is what you would change.
+1. Let's generate hashes. Open the terminal in vscode by clicking "terminal" in the top menu, then "New Terminal".
+1. In the terminal change to the directory we are using. `cd ~/lab/Evasion_Capability_Development/2-api-hashing` 
+1. Now run the python file. `api-hash-gen-constant.py`
+> It will correctly generate the hashes for each function name.
+1. Now open the file "all-api-hash-call.c"
+1. Notice a few things are different. on line 7 we have to create the has from the string and use the hash value that was used in the python code to generate the hashes.
+1. Next we create a function called getFunctionAddressByHash, that uses the generated hashes, and the name of the library, to identify the address of the desired function in memory using the hash instead of the name.
+1. Then starting on line 61, we create custom versions of the function definitions with the required attributes that will define those functions in our program, so we can pass information to them without calling them directly.
+1. Finally on line 101, we set the hashes for each function, and then on line 108 create the replicated api calls using the getFunctionAddressByHash function created earlier.
+> Note shellexecute is actuall ShellExecuteA, it can be either ShellExecuteA or W.  A is for ascii, W is for wide character. 
+1.    
 
 
 
-### Problem 3: EDR Hooking API Calls
-EDR hooks calls to windows api. Think crowdstrike kernel level access ;).
 
-1. 
-1.
-1.
-1.
-
-####
-1. 
-
+To compile these on your own you must load mingw-w64 library on linux or macos and use the following compile instructions:
