@@ -81,7 +81,10 @@ Anti-Virus is one thing, but the next issue for malware arises at runtime, or wo
 **Swap Back to Ubuntu Desktop**
 
 1. Close the curren tabs.
-1. In the left hand navigation 
+1. In the left hand navigation open 2-api-hashing>api-call2.c
+> Walk through the code, starting on line 47, "main" you can see the comments for the the various API's being called directly. As in, because we linked them by loading the windows.h file with the include statement.  This is the code that is executed in the api-calls.exe file you just ran. These then show up in clear text in the exe, which can be used as signatures, and provide information about what the exe is/can do for your RE.
+1. To avoid this, we need to obfuscate how we call those API's from the libraries already loaded in memory on the system. Open the api-hash-gen-constant.py
+1. 
 
 
 
