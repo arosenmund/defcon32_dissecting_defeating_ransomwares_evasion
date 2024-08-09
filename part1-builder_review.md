@@ -173,7 +173,7 @@ To begin:
 
     Once the dialogue box opens, enter the following into the field. Clear out everything first, then paste this in:
     
-    `"C:\Users\LegitUser\Desktop\LBLeak\builder.exe" -type enc -exe -pass -pubkey pub.key -config config.json -ofile LB3-dc32.exe`
+    `"C:\Users\pslearner\Desktop\LBLeak\builder.exe" -type enc -exe -pass -pubkey pub.key -config config.json -ofile LB3-dc32.exe`
     
     The above tells the debugger to use the provided arguments with the builder:
     
@@ -369,7 +369,7 @@ Now it's time to debug! Let's get to it!
     
 1. Hit `F8` to step over the passcode file writing function.
 
-    Once you've stepped over this function, check the `C:\Users\LegitUser\Desktop\LBLeak\` folder. You will now see a passcode will with the name `LB3-dc32.exePassword_exe.txt`. Open this file in Notepad++.
+    Once you've stepped over this function, check the `C:\Users\pslearner\Desktop\LBLeak\` folder. You will now see a passcode will with the name `LB3-dc32.exePassword_exe.txt`. Open this file in Notepad++.
     
     We will review this file as a group.
     
@@ -379,7 +379,7 @@ Now it's time to debug! Let's get to it!
 
 1. Hit `F8` to step over the ransomware payload file writing function.
 
-    Once you've stepped over this function, check the `C:\Users\LegitUser\Desktop\LBLeak\` folder. You will now see that the builder has created the ransomware binary.
+    Once you've stepped over this function, check the `C:\Users\pslearner\Desktop\LBLeak\` folder. You will now see that the builder has created the ransomware binary: `LB3-dc32.exe`.
     
     That's it! We've walked through the building process and have witnessed both the passcode and ransomware binary files being written to disk.
 
