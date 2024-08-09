@@ -111,3 +111,5 @@ Anti-Virus is one thing, but the next issue for malware arises at runtime, or wo
 
 
 To compile these on your own you must load mingw-w64 library on linux or macos and use the following compile instructions:
+
+`x86_64-w64-mingw32-g++ lsass-dump-evasion.c  -o dumplsass-evade.exe -static -lDbghelp -lpsapi`
