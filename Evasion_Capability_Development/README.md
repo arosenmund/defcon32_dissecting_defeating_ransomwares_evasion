@@ -16,6 +16,7 @@ Windows Desktop:
 
 
 
+
 ### Problem 1:  Anti-Virus Signature Detection
 Anti Virus Essentially uses a list of strings to check statically through binaries and other files to detect strings that it considers malicous.  If you want to check multiple engines at the same time you can run your binaries through virus total, and check on the detections. For this lab we will focus on defender and some yara sigantures that we want to defeat.  File read events trigger antivirus actions on various files.
 
@@ -23,9 +24,23 @@ Anti Virus Essentially uses a list of strings to check statically through binari
 1. Open up the **Windows Desktop**
 1. Right click, & run as administrator cmd shortcut on the Desktop.
 1. In the CMD console, switch directories to the LAB_FILES\Evasion_Capability directory. `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development`
-1. Now copy the file "evil1.exe" to another folder.  
-
-
+1. Type powershell in the search bar, and right click and run powershell, (not powershell 7) as administrator.
+> Must use Powershell for lsass dump.
+1. In the powershell console, turn on windows defender and remove .exe exclusions with this command in powershell:
+```
+Set-MpPreference -DisableRealtimeMonitoring $False
+Remove-MpPreference -ExclusionExtension ".exe"
+Get-MpPreference
+Get-MpComputerStatus
+```
+> The last command you can read the output to validate your changes, and a semi current rule set date. We will execute the rest of the workshop with defender on, and no added exclusions. From Get-MpComputerStatus you can see **RealTimePRotectionEnabled: True** is set.
+1. In powershell, also navigate to following directory: `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\1-signature-evasion`.
+1. Once there try to run the dumplsass.exe file. `dumplsass.exe`
+> Notice the output says that the file contained a virus!
+1. ?Take learner back to ubuntu to change the stuff themselves/show them?
+1. Run `get-mpthreat` to identify the detections that defender made on the dumplsass file.
+1. That file has been identified and deleted, so now let's use the one that was created with the modifications that matched the yara signatures on the slides.
+1. Again in powershell run "
 
 ### Problem 2: EDR & RE Basic detections at Runtime
 Anti-Virus is one thing, but the next issue for malware arises at runtime. The reason for this is that the event of 

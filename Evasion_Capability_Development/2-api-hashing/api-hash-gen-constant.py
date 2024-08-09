@@ -1,7 +1,7 @@
 #Hide Capability of a Particular function
 
 # List of API names to hash
-APIsToHash = ["CreateThread","CreateRemoteThread","VirtualAlloc","IsDebuggerPresent","ShellExecute"]
+APIsToHash = ["CreateThread","CreateRemoteThread","VirtualAlloc","IsDebuggerPresent","ShellExecuteA"]
 
 # Iterate over each API name in the list
 for api in APIsToHash:

