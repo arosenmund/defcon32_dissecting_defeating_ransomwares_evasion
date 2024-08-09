@@ -86,8 +86,8 @@ Anti-Virus is one thing, but the next issue for malware arises at runtime, or wo
 1. To avoid this, we need to obfuscate how we call those API's from the libraries already loaded in memory on the system. Open the api-hash-gen-constant.py
 > For any API functions you need to call, you can use this to calculate the hashes. You should change the seed hash. You could make it a different seed for each, just like the builder. For the sake of teaching this, that is not what we are going to do. Line 22 has the "hash value" that is what you would change.
 1. Let's generate hashes. Open the terminal in vscode by clicking "terminal" in the top menu, then "New Terminal".
-1. In the terminal change to the directory we are using. `cd ~/lab/Evasion_Capability_Development/2-api-hashing` 
-1. Now run the python file. `api-hash-gen-constant.py`
+1. In the terminal change to the directory we are using. `cd ~/labs/Evasion_Capability_Development/2-api-hashing` 
+1. Now run the python file. `python3 api-hash-gen-constant.py`
 > It will correctly generate the hashes for each function name.
 1. Now open the file "all-api-hash-call.c"
 1. Notice a few things are different. on line 7 we have to create the has from the string and use the hash value that was used in the python code to generate the hashes.
