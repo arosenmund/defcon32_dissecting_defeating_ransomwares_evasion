@@ -70,10 +70,18 @@ Anti-Virus is one thing, but the next issue for malware arises at runtime, or wo
 
 #### API Hashing
 
-1. On the Windows Desktop. 
-1. 
-1.
-1.
+1. On the Windows Desktop in an Administrative cmd console, ensure you are in this directory `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\2-api-hashing` 
+1. From here run notepade.exe to start an existing process. 
+1. Minimize notepade.
+1. Now in the cmd console run `.\api-calls.exe`
+> This will open a new notepade using shell execute, as well as gain access to the the thread handle of the existing notepad, as well as run the other api calls that show in the console.  But!  Notice defender doesn't care at all. But, if you upload this to virus total you get hits from EDR vendors...yes even crowdstrike. 
+
+---
+
+**Swap Back to Ubuntu Desktop**
+
+1. Close the curren tabs.
+1. In the left hand navigation 
 
 
 
