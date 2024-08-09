@@ -95,7 +95,17 @@ Anti-Virus is one thing, but the next issue for malware arises at runtime, or wo
 1. Then starting on line 61, we create custom versions of the function definitions with the required attributes that will define those functions in our program, so we can pass information to them without calling them directly.
 1. Finally on line 101, we set the hashes for each function, and then on line 108 create the replicated api calls using the getFunctionAddressByHash function created earlier.
 > Note shellexecute is actuall ShellExecuteA, it can be either ShellExecuteA or W.  A is for ascii, W is for wide character. 
-1.    
+1. The functions are resolved on line 115, and then each of these redifined API's are called starting on line 120. 
+
+---
+**Swap Back to Windows Desktop**
+
+1. In the CMD console ensure you are in the right directory still. `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\2-api-hashing` 
+1. Now run the `.\all-hash-api-call.exe` file.
+1. Notepad launches, but you can minimize it and see the output of CMD console.
+1. Each function is resolved by hash, and the address of the function in memory is printed, and then they execute.
+
+~ironcat
 
 
 
