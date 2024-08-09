@@ -127,7 +127,8 @@ int main() {
         WaitForSingleObject(hThread, INFINITE);
         CloseHandle(hThread);
     }
-
+    BOOL isDebuggerPresent = IsDebuggerPresent();
+    
     // Call CreateRemoteThread (for demonstration, this is called on the current process)
     HANDLE hRemoteThread = CreateRemoteThread(GetCurrentProcess(), NULL, 0, (LPTHREAD_START_ROUTINE)IsDebuggerPresent, NULL, 0, &tid);
     if (hRemoteThread == NULL) {
@@ -138,17 +139,6 @@ int main() {
         CloseHandle(hRemoteThread);
     }
 
-    // Call VirtualAlloc
-    LPVOID lpAddress = VirtualAlloc(NULL, 4096, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
-    if (lpAddress == NULL) {
-        printf("VirtualAlloc failed with error %lu\n", GetLastError());
-    } else {
-        printf("VirtualAlloc succeeded.\n");
-    }
-
-    // Call IsDebuggerPresent
-    BOOL isDebuggerPresent = IsDebuggerPresent();
-    printf("IsDebuggerPresent returned %d\n", isDebuggerPresent);
 
     // Call ShellExecute
     HINSTANCE hInstance = ShellExecute(NULL, "open", "notepad.exe", NULL, NULL, SW_SHOWNORMAL);
@@ -157,6 +147,20 @@ int main() {
     } else {
         printf("ShellExecute succeeded.\n");
     }
+
+    // Call IsDebuggerPresent
+    printf("IsDebuggerPresent returned %d\n", isDebuggerPresent);    
+    
+    // Call VirtualAlloc
+    LPVOID lpAddress = VirtualAlloc(NULL, 4096, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+    if (lpAddress == NULL) {
+        printf("VirtualAlloc failed with error %lu\n", GetLastError());
+    } else {
+        printf("VirtualAlloc succeeded.\n");
+    }
+
+    
+    
 
     return 0;
 }
