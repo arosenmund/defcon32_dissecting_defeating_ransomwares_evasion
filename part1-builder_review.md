@@ -23,21 +23,23 @@ Before we can begin, we need to extract our lab files. The process is simple:
 
 1. Locate the `RUN_ME_AS_ADMIN_FIRST.bat` script (the suffix will not be visible, so you'll just see `RUN_ME_AS_ADMIN_FIRST`)
 
-1. Right-click on `RUN_ME_AS_ADMIN_FIRST` and select `Run as Admin`
+1. Right-click on `RUN_ME_AS_ADMIN_FIRST` and select `Run as administrator`
+
+- Select `Yes` on the UAC prompt
 
 - This will disable Windows Defender, and stop it from interfering with our work
 
 1. In the same `LAB_FILES` folder, double-click on `dc32_workshop_files-part1`. This is actually a `.zip` file.
 
-1. In the resulting folder, double-click on the `dc32_workshop_files-part1` folder
-
-1. Select both the `ghidra_projects` and `LBLeak` folders and drag them to the desktop
+1. Select both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder and drag them to the desktop
 
 - Once you drag the files to the desktop, Windows will prompt you for the zip archive password.
 
 1. Enter the archive password: `dc32workshop`
 
-You should now have both the `ghidra_projects` and `LBLeak` folders on your desktop. Once you have these, you are ready to begin!
+1. Close the zip archive window to return to the Desktop
+
+You should now have both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder on your desktop. Once you have these, you are ready to begin!
 
 # Ghidra Analysis
 
@@ -46,8 +48,11 @@ In this section, we're going to open and configure as required for the workshop.
 1. Double-click the `ghidra_11.1.1_PUBLIC` folder on the desktop
 1. Double-click the `ghidra_Run` .batch script in this folder
 1. Choose `I Agree` to continue executing Ghidra
- - Once Ghidra opens, you'll be at the Project window
-1. Open the provided Ghidra project by choosing `File > Open Project`. Navigate to `Home > Documents > ghidra_projects > lb3builder.gpr` and select to open the project.
+ - Once Ghidra opens, you'll be prompted with the `Tip of the Day` window
+1. Click the `Close` button on the tips window to close it
+1. Open the provided Ghidra project by choosing `File > Restore Project...`
+    1. For the `Archive File`, navigate to `C:\Users\pslearner\Desktop\` and select the `lb3builder_2024_08_08.gar` project
+1. Click `OK` to import the project
 1. Double-click on the `builder.exe` file in the recently-opened project
 1. Select the `Edit` menu and select `Tool Options`
 1. From the left-hand nav menu, expand `Listing Fields`
@@ -61,7 +66,7 @@ In this section, we're going to open and configure as required for the workshop.
 
 1. To begin code review, in the left-hand nav menu, find the `Symbol Tree` area, expand the `Exports` folder, and double-click on `entry`.
 
-This will bring you to the entry point of the builder. We will now bein the code review.
+This will bring you to the entry point of the builder. We will now begin the code review.
 
 ## What Happens First?
 
@@ -79,7 +84,7 @@ This will bring you to the entry point of the builder. We will now bein the code
 
 1. At `0x00403b39`, we see a call to `GetCommandLineW`, which will fetch the command line parameters for the process. This is a critical step in the builder, as the options for building are provided on the command line.
 
-1. At `0x00403b8e` we begin looping through arguments. 
+1. At `0x00403b8e` we begin looping through arguments.
 
 1. At `0x00403bbc`, we see the `-pass` parameter being checked.
 
