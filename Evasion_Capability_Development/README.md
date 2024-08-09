@@ -15,9 +15,8 @@ Anti Virus Essentially uses a list of strings to check statically through binari
 1. In the CMD console, switch directories to the LAB_FILES\Evasion_Capability directory. `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development`
 1. Type powershell in the search bar, and right click and run powershell, (not powershell 7) as administrator.
 > We will use both CMD and Powershell.
-
----
 1. In Powershell run `get-mpthreat`.
+> You will find the `dumplsass.exe` that happened at the time the files were downloaded from the Github.  This is because Defender was triggered by the CreateFile event.  Anti-Virus triggers, and sometiems triggers different kinds of signatures and rules for different actions.
 
 ---
 **Now Setup in Ubuntu Desktop**
@@ -39,7 +38,18 @@ Anti Virus Essentially uses a list of strings to check statically through binari
 
 1. In the powershell window, make sure you are in the directory `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\1-signature-evasion`.
 1. Once there run `expand-archive`. **Make Sure Defender is Still Off**
-1. Now run 
+1. With the file write already done, turn defender on!
+1. In the powershell console, turn on windows defender and remove .exe exclusions with this command in powershell:
+```
+Set-MpPreference -DisableRealtimeMonitoring $False
+Remove-MpPreference -ExclusionExtension ".exe"
+Get-MpPreference
+Get-MpComputerStatus
+```
+> The last command you can read the output to validate your changes, and a semi current rule set date. We will execute the rest of the workshop with defender on, and no added exclusions. From Get-MpComputerStatus you can see **RealTimePRotectionEnabled: True** is set.
+
+1. In powershell, also navigate to following directory: `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\1-signature-evasion`.
+
 1. ?Take learner back to ubuntu to change the stuff themselves/show them?
 1. Run `get-mpthreat` to identify the detections that defender made on the dumplsass file.
 1. That file has been identified and deleted, so now let's use the one that was created with the modifications that matched the yara signatures on the slides.
