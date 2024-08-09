@@ -25,15 +25,15 @@ Before we can begin, we need to extract our lab files. The process is simple:
 
 1. Right-click on `RUN_ME_AS_ADMIN_FIRST` and select `Run as administrator`.
 
-- Select `Yes` on the UAC prompt.
+    - Select `Yes` on the UAC prompt.
 
-- This will disable Windows Defender, and stop it from interfering with our work.
+    - This will disable Windows Defender, and stop it from interfering with our work.
 
 1. In the same `LAB_FILES` folder, double-click on `dc32_workshop_files-part1`. This is actually a `.zip` file.
 
 1. Select both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder and drag them to the desktop.
 
-- Once you drag the files to the desktop, Windows will prompt you for the zip archive password.
+    - Once you drag the files to the desktop, Windows will prompt you for the zip archive password.
 
 1. Enter the archive password: `dc32workshop`
 
@@ -46,18 +46,31 @@ You should now have both the `lb3builder_2024_08_08.gar` file and `LBLeak` folde
 In this section, we're going to open and configure as required for the workshop.
 
 1. Double-click the `ghidra_11.1.1_PUBLIC` folder on the desktop.
+
 1. Double-click the `ghidra_Run` .batch script in this folder.
+
 1. Choose `I Agree` to continue executing Ghidra.
- - Once Ghidra opens, you'll be prompted with the `Tip of the Day` window.
+
+    - Once Ghidra opens, you'll be prompted with the `Tip of the Day` window.
+
 1. Click the `Close` button on the tips window to close it.
+
 1. Open the provided Ghidra project by choosing `File > Restore Project...`:
-    1. For the `Archive File`, navigate to `C:\Users\pslearner\Desktop\` and select the `lb3builder_2024_08_08.gar` project
+
+    - For the `Archive File`, navigate to `C:\Users\pslearner\Desktop\` and select the `lb3builder_2024_08_08.gar` project
+
 1. Click `OK` to import the project.
+
 1. Double-click on the `builder.exe` file in the recently-opened project.
+
 1. Select the `Edit` menu and select `Tool Options`.
+
 1. From the left-hand nav menu, expand `Listing Fields`.
+
 1. Choose `Cursor text highlight` in this menu.
+
 1. Change the `Mouse button the activate` from `MIDDLE` -> `LEFT`.
+
 1. Press `OK` to save your settings.
 
     The above steps walk you through opening the provided (and commented!) project and set the left-click option to highlight variables throughout the code.
@@ -186,15 +199,15 @@ Rather than set breakpoints manually, since we won't have much time to do this i
     
     We've now imported our database for `builder.exe`, which should include all of our pre-configured breakpoints.
     
-Now let's check that our breakpoints are in order.
+    Now let's check that our breakpoints are in order.
 
 1. Choose `View -> Breakpoints` (or hit `Alt + B`).
 
-You should see the following:
+    You should see the following:
 
-![ScreenShot](part1-x32dbg_breakpoints.png)
+    ![ScreenShot](part1-x32dbg_breakpoints.png)
 
-If your breakpoints look like the above, great! If not, whoops!
+    If your breakpoints look like the above, great! If not, whoops!
 
 1. Choose `View -> CPU` (or hit `Alt + C`).
 
@@ -368,9 +381,10 @@ Now it's time to debug! Let's get to it!
 
     Once you've stepped over this function, check the `C:\Users\LegitUser\Desktop\LBLeak\` folder. You will now see that the builder has created the ransomware binary.
     
-That's it! We've walked through the building process and have witnessed both the passcode and ransomware binary files being written to disk.
+    That's it! We've walked through the building process and have witnessed both the passcode and ransomware binary files being written to disk.
 
 1. Close `x32dbg`. The debugger will shut down and you will now be prepared for round 2 of the workshop.
+
 
 BOOM! We have completed part 1 of the workshop!
 ::: sigh of relief :::
