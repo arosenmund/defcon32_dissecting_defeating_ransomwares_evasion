@@ -37,7 +37,7 @@ Anti Virus Essentially uses a list of strings to check statically through binari
 **Swap Back to the Windows Desktop**
 
 1. In the powershell window, make sure you are in the directory `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\1-signature-evasion`.
-1. Once there run `expand-archive`. **Make Sure Defender is Still Off**
+1. Once there run `expand-archive dumplsass.exe.zip`. **Make Sure Defender is Still Off**
 1. With the file write already done, turn defender on!
 1. In the powershell console, turn on windows defender and remove .exe exclusions with this command in powershell:
 ```
@@ -48,23 +48,29 @@ Get-MpComputerStatus
 ```
 > The last command you can read the output to validate your changes, and a semi current rule set date. We will execute the rest of the workshop with defender on, and no added exclusions. From Get-MpComputerStatus you can see **RealTimePRotectionEnabled: True** is set.
 
-1. In powershell, also navigate to following directory: `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\1-signature-evasion`.
-
-1. ?Take learner back to ubuntu to change the stuff themselves/show them?
+1. In powershell, also navigate to following directory: `cd c:\Users\Public\Desktop\LAB_FILES\Evasion_Capability_Development\1-signature-evasion`. (You are probably already there.)
+1. Now run the dumplsass.exe from the archive. `.\dumplsass.exe`
+> It will now instead get got on the even "Process Create" analyze the file being loaded into memory, and catch it as malware. This will also cause defender to delte the file.
 1. Run `get-mpthreat` to identify the detections that defender made on the dumplsass file.
 1. That file has been identified and deleted, so now let's use the one that was created with the modifications that matched the yara signatures on the slides.
-1. 
+1. Now run `.\dumplsass-evade.exe`
+> This is not detected my defender for the strings in the file, nor is it caugh at run time. Simply by changing a few lines...it is however hanging.
+1. Exit the powershell window, the whole system is hanging, so you need to close the window to get functions back.
+1. Now, chec the expected output. In the CMD console run the following `dir c:\Users\Public` 
+> Here you will find lp.dump with 0 bytes.  The code accessed the PID, but when going to create the file it has to load the contents of the process into a memory buffer. Windows defender recognizes the contents of it's own LSASS process with defender signatures and will block that activity on the event of it trying to be written to a file.
+1. In CMD console, get into a powershell prompt.  `powershell`
+1. Run `get-mpthreate`
+> You will see there are no additional detections than from the previous detection of the file writes.
 
-> 
+
 
 
 ### Problem 2: EDR & RE Basic detections at Runtime
-Anti-Virus is one thing, but the next issue for malware arises at runtime. The reason for this is that the event of 
+Anti-Virus is one thing, but the next issue for malware arises at runtime, or worse, pesky humans trying to RE things. 
 
-#### Runtime Detection!
-Strings in memory! OH noes
+#### API Hashing
 
-1. 
+1. On the Windows Desktop. 
 1. 
 1.
 1.
