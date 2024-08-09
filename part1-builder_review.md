@@ -21,15 +21,31 @@ Before we can begin, we need to extract our lab files. The process is simple:
 
 1. On the Desktop, open the `LAB_FILES` folder
 
-1. In this folder, right-click on `dc32_workshop_files-part1` and choose `Extract All..."
+1. Locate the `RUN_ME_AS_ADMIN_FIRST.bat` script (the suffix will not be visible, so you'll just see `RUN_ME_AS_ADMIN_FIRST`)
 
-1. 
+1. Right-click on `RUN_ME_AS_ADMIN_FIRST` and select `Run as Admin`
+
+- This will disable Windows Defender, and stop it from interfering with our work
+
+1. In the same `LAB_FILES` folder, double-click on `dc32_workshop_files-part1`. This is actually a `.zip` file.
+
+1. In the resulting folder, double-click on the `dc32_workshop_files-part1` folder
+
+1. Select both the `ghidra_projects` and `LBLeak` folders and drag them to the desktop
+
+- Once you drag the files to the desktop, Windows will prompt you for the zip archive password.
+
+1. Enter the archive password: `dc32workshop`
+
+You should now have both the `ghidra_projects` and `LBLeak` folders on your desktop. Once you have these, you are ready to begin!
 
 # Ghidra Analysis
 
 In this section, we're going to open and configure as required for the workshop.
 
-1. Double-click `ghidraRun.bat` on the desktop
+1. Double-click the `ghidra_11.1.1_PUBLIC` folder on the desktop
+1. Double-click the `ghidra_Run` .batch script in this folder
+1. Choose `I Agree` to continue executing Ghidra
  - Once Ghidra opens, you'll be at the Project window
 1. Open the provided Ghidra project by choosing `File > Open Project`. Navigate to `Home > Documents > ghidra_projects > lb3builder.gpr` and select to open the project.
 1. Double-click on the `builder.exe` file in the recently-opened project
