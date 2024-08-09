@@ -19,25 +19,59 @@ Your desktop should look similar to the following once fully loaded:
 
 Before we can begin, we need to extract our lab files. The process is simple:
 
-1. On the Desktop, open the `LAB_FILES` folder
+1. On the Desktop, open the `LAB_FILES` folder.
 
-1. In this folder, right-click on `dc32_workshop_files-part1` and choose `Extract All..."
+1. Locate the `RUN_ME_AS_ADMIN_FIRST.bat` script (the suffix will not be visible, so you'll just see `RUN_ME_AS_ADMIN_FIRST`).
 
-1. 
+1. Right-click on `RUN_ME_AS_ADMIN_FIRST` and select `Run as administrator`.
+
+    - Select `Yes` on the UAC prompt.
+
+    - This will disable Windows Defender, and stop it from interfering with our work.
+
+1. In the same `LAB_FILES` folder, double-click on `dc32_workshop_files-part1`. This is actually a `.zip` file.
+
+1. Select both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder and drag them to the desktop.
+
+    - Once you drag the files to the desktop, Windows will prompt you for the zip archive password.
+
+1. Enter the archive password: `dc32workshop`
+
+1. Close the zip archive window to return to the Desktop.
+
+You should now have both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder on your desktop. Once you have these, you are ready to begin!
 
 # Ghidra Analysis
 
 In this section, we're going to open and configure as required for the workshop.
 
-1. Double-click `ghidraRun.bat` on the desktop
- - Once Ghidra opens, you'll be at the Project window
-1. Open the provided Ghidra project by choosing `File > Open Project`. Navigate to `Home > Documents > ghidra_projects > lb3builder.gpr` and select to open the project.
-1. Double-click on the `builder.exe` file in the recently-opened project
-1. Select the `Edit` menu and select `Tool Options`
-1. From the left-hand nav menu, expand `Listing Fields`
-1. Choose `Cursor text highlight` in this menu
-1. Change the `Mouse button the activate` from `MIDDLE` -> `LEFT`
-1. Press `OK` to save your settings
+1. Double-click the `ghidra_11.1.1_PUBLIC` folder on the desktop.
+
+1. Double-click the `ghidra_Run` .batch script in this folder.
+
+1. Choose `I Agree` to continue executing Ghidra.
+
+    - Once Ghidra opens, you'll be prompted with the `Tip of the Day` window.
+
+1. Click the `Close` button on the tips window to close it.
+
+1. Open the provided Ghidra project by choosing `File > Restore Project...`:
+
+    - For the `Archive File`, navigate to `C:\Users\pslearner\Desktop\` and select the `lb3builder_2024_08_08.gar` project
+
+1. Click `OK` to import the project.
+
+1. Double-click on the `builder.exe` file in the recently-opened project.
+
+1. Select the `Edit` menu and select `Tool Options`.
+
+1. From the left-hand nav menu, expand `Listing Fields`.
+
+1. Choose `Cursor text highlight` in this menu.
+
+1. Change the `Mouse button the activate` from `MIDDLE` -> `LEFT`.
+
+1. Press `OK` to save your settings.
 
     The above steps walk you through opening the provided (and commented!) project and set the left-click option to highlight variables throughout the code.
 
@@ -45,7 +79,7 @@ In this section, we're going to open and configure as required for the workshop.
 
 1. To begin code review, in the left-hand nav menu, find the `Symbol Tree` area, expand the `Exports` folder, and double-click on `entry`.
 
-This will bring you to the entry point of the builder. We will now bein the code review.
+This will bring you to the entry point of the builder. We will now begin the code review.
 
 ## What Happens First?
 
@@ -63,7 +97,7 @@ This will bring you to the entry point of the builder. We will now bein the code
 
 1. At `0x00403b39`, we see a call to `GetCommandLineW`, which will fetch the command line parameters for the process. This is a critical step in the builder, as the options for building are provided on the command line.
 
-1. At `0x00403b8e` we begin looping through arguments. 
+1. At `0x00403b8e` we begin looping through arguments.
 
 1. At `0x00403bbc`, we see the `-pass` parameter being checked.
 
@@ -121,25 +155,37 @@ Let's debug this bad boy!!
 
 ## Configuring the Debugger
 
-1. Double-click `x32dbg.exe` on the Desktop.
+We'll now debug the builder in `x32dbg` in order to follow some of the fun things it does when writing the ransomware binary.
 
-1. Choose `File -> Open` and select `C:\Users\LegitUser\Desktop\LBLeak\builder.exe`.
+To begin:
+
+1. Double-click the `release` folder on the desktop.
+
+1. Double-click the `x32` folder.
+
+1. Right-click `x32dbg.exe` and select `Run as administrator`.
+
+    **This step is important! You need to run `x32dbg` as Admin for the workshop to function as expected.**
+
+1. Maximize the window to full screen mode.
+
+1. Choose `File -> Open` and select `C:\Users\pslearner\Desktop\LBLeak\builder.exe`
 
 1. Choose `File -> Change Command Line`.
 
     Once the dialogue box opens, enter the following into the field. Clear out everything first, then paste this in:
     
-    `"C:\Users\LegitUser\Desktop\LBLeak\builder.exe" -type enc -exe -pass -pubkey pub.key -config config.json -ofile LB3-dc32.exe`
+    `"C:\Users\pslearner\Desktop\LBLeak\builder.exe" -type enc -exe -pass -pubkey pub.key -config config.json -ofile LB3-dc32.exe`
     
     The above tells the debugger to use the provided arguments with the builder:
     
-    1. `-type enc`: We're going to create an encryptor
+    1. `-type enc`: We're going to create an encryptor.
     
     1. `-exe`: We're going to create an EXE (not a DLL).
     
     1. `-pass`: We're going to generate a passcode required to run the compiled ransomware binary.
     
-    1. `-pubkey pub.key`: We're going to use a pre-generate key called `pub.key`
+    1. `-pubkey pub.key`: We're going to use a pre-generated key called `pub.key`.
     
     1. `-config config.json`: We're going to use the `config.json` configuratoin file.
     
@@ -151,19 +197,19 @@ Rather than set breakpoints manually, since we won't have much time to do this i
 
 1. Choose `File -> Database -> Import database`.
 
-    Select `C:\Users\LegitUser\Desktop\LBLeak\builder.dd32` and hit `Open`.
+    Select `C:\Users\pslearner\Desktop\LBLeak\builder.dd32` and hit `Open`.
     
     We've now imported our database for `builder.exe`, which should include all of our pre-configured breakpoints.
     
-Now let's check that our breakpoints are in order.
+    Now let's check that our breakpoints are in order.
 
 1. Choose `View -> Breakpoints` (or hit `Alt + B`).
 
-You should see the following:
+    You should see the following:
 
-![ScreenShot](part1-x32dbg_breakpoints.png)
+    ![ScreenShot](part1-x32dbg_breakpoints.png)
 
-If your breakpoints look like the above, great! If not, whoops!
+    If your breakpoints look like the above, great! If not, whoops!
 
 1. Choose `View -> CPU` (or hit `Alt + C`).
 
@@ -253,7 +299,7 @@ All breakpoints have been set!
 
 ## Delete Pre-Existing Files
 
-In Explorer, go to `C:\Users\LegitUser\Desktop\LBLeak\` and delete the following files if they exist:
+In Explorer, go to `C:\Users\pslearner\Desktop\LBLeak\` and delete the following files _if they exist_:
 
 1. `LB3-dc32.exe`
 
@@ -325,7 +371,7 @@ Now it's time to debug! Let's get to it!
     
 1. Hit `F8` to step over the passcode file writing function.
 
-    Once you've stepped over this function, check the `C:\Users\LegitUser\Desktop\LBLeak\` folder. You will now see a passcode will with the name `LB3-dc32.exePassword_exe.txt`. Open this file in Notepad++.
+    Once you've stepped over this function, check the `C:\Users\pslearner\Desktop\LBLeak\` folder. You will now see a passcode will with the name `LB3-dc32.exePassword_exe.txt`. Open this file in Notepad++.
     
     We will review this file as a group.
     
@@ -335,11 +381,12 @@ Now it's time to debug! Let's get to it!
 
 1. Hit `F8` to step over the ransomware payload file writing function.
 
-    Once you've stepped over this function, check the `C:\Users\LegitUser\Desktop\LBLeak\` folder. You will now see that the builder has created the ransomware binary.
+    Once you've stepped over this function, check the `C:\Users\pslearner\Desktop\LBLeak\` folder. You will now see that the builder has created the ransomware binary: `LB3-dc32.exe`.
     
-That's it! We've walked through the building process and have witnessed both the passcode and ransomware binary files being written to disk.
+    That's it! We've walked through the building process and have witnessed both the passcode and ransomware binary files being written to disk.
 
 1. Close `x32dbg`. The debugger will shut down and you will now be prepared for round 2 of the workshop.
+
 
 BOOM! We have completed part 1 of the workshop!
 ::: sigh of relief :::
