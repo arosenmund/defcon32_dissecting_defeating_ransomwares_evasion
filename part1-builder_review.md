@@ -163,7 +163,9 @@ To begin:
 
 1. Double-click the `x32` folder.
 
-1. Double-click `x32dbg.exe` to execute it.
+1. Right-click `x32dbg.exe` and select `Run as administrator`.
+
+    **This step is important! You need to run `x32dbg` as Admin for the workshop to function as expected.**
 
 1. Maximize the window to full screen mode.
 
