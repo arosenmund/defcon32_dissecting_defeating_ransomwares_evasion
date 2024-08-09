@@ -99,10 +99,10 @@ typedef HINSTANCE (WINAPI *PFN_ShellExecute)(
 int main() {
     // Define the hashes for the required functions
     DWORD hash_CreateThread = 0x00544e304;        // Hash for "CreateThread"
-    DWORD hash_CreateRemoteThread = 0xB0FA6C52;   // Hash for "CreateRemoteThread"
-    DWORD hash_VirtualAlloc = 0x91afca54;         // Hash for "VirtualAlloc"
-    DWORD hash_IsDebuggerPresent = 0x82849eb9;    // Hash for "IsDebuggerPresent"
-    DWORD hash_ShellExecute = 0x0cead96c;         // Hash for "ShellExecuteA"
+    DWORD hash_CreateRemoteThread = 0x00844e304;   // Hash for "CreateRemoteThread"
+    DWORD hash_VirtualAlloc = 0x0055f63c3;         // Hash for "VirtualAlloc"
+    DWORD hash_IsDebuggerPresent = 0x00847b534;    // Hash for "IsDebuggerPresent"
+    DWORD hash_ShellExecute = 0x00673a4e5;         // Hash for "ShellExecuteA"
 
     // Load and resolve the functions by their hashes
     PFN_CreateThread CreateThread = (PFN_CreateThread)getFunctionAddressByHash((char *)"kernel32.dll", hash_CreateThread);
