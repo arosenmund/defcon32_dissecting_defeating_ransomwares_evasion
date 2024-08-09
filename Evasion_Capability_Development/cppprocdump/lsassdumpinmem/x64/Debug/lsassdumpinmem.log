@@ -1,0 +1,7 @@
+﻿  lsassdumpinmem.cpp
+E:\DC31\cppprocdump\lsassdumpinmem\lsassdumpinmem.cpp(31,41): warning C4267: 'argument': conversion from 'size_t' to 'DWORD', possible loss of data
+E:\DC31\cppprocdump\lsassdumpinmem\lsassdumpinmem.cpp(71,10): warning C4477: 'printf' : format string '%x' requires an argument of type 'unsigned int', but variadic argument 1 has type 'ULONG64'
+E:\DC31\cppprocdump\lsassdumpinmem\lsassdumpinmem.cpp(71,10): message : consider using '%llx' in the format string
+E:\DC31\cppprocdump\lsassdumpinmem\lsassdumpinmem.cpp(71,10): message : consider using '%Ix' in the format string
+E:\DC31\cppprocdump\lsassdumpinmem\lsassdumpinmem.cpp(71,10): message : consider using '%I64x' in the format string
+  lsassdumpinmem.vcxproj -> E:\DC31\cppprocdump\lsassdumpinmem\x64\Debug\lsassdumpinmem.exe
