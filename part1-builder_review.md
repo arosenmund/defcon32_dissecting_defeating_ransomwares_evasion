@@ -146,13 +146,15 @@ We'll now debug the builder in `x32dbg` in order to follow some of the fun thing
 
 To begin:
 
-1. Double-click the `release` folder on the desktop
+1. Double-click the `release` folder on the desktop.
 
-1. Double-click the `x32` folder
+1. Double-click the `x32` folder.
 
 1. Double-click `x32dbg.exe` to execute it.
 
-1. Choose `File -> Open` and select `C:\Users\pslearner\Desktop\LBLeak\builder.exe`.
+1. Maximize the window to full screen mode.
+
+1. Choose `File -> Open` and select `C:\Users\pslearner\Desktop\LBLeak\builder.exe`
 
 1. Choose `File -> Change Command Line`.
 
@@ -162,7 +164,7 @@ To begin:
     
     The above tells the debugger to use the provided arguments with the builder:
     
-    1. `-type enc`: We're going to create an encryptor
+    1. `-type enc`: We're going to create an encryptor.
     
     1. `-exe`: We're going to create an EXE (not a DLL).
     
