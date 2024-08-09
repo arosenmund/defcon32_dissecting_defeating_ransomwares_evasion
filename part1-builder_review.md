@@ -182,7 +182,7 @@ Rather than set breakpoints manually, since we won't have much time to do this i
 
 1. Choose `File -> Database -> Import database`.
 
-    Select `C:\Users\LegitUser\Desktop\LBLeak\builder.dd32` and hit `Open`.
+    Select `C:\Users\pslearner\Desktop\LBLeak\builder.dd32` and hit `Open`.
     
     We've now imported our database for `builder.exe`, which should include all of our pre-configured breakpoints.
     
