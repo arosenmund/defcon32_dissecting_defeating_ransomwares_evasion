@@ -19,25 +19,25 @@ Your desktop should look similar to the following once fully loaded:
 
 Before we can begin, we need to extract our lab files. The process is simple:
 
-1. On the Desktop, open the `LAB_FILES` folder
+1. On the Desktop, open the `LAB_FILES` folder.
 
-1. Locate the `RUN_ME_AS_ADMIN_FIRST.bat` script (the suffix will not be visible, so you'll just see `RUN_ME_AS_ADMIN_FIRST`)
+1. Locate the `RUN_ME_AS_ADMIN_FIRST.bat` script (the suffix will not be visible, so you'll just see `RUN_ME_AS_ADMIN_FIRST`).
 
-1. Right-click on `RUN_ME_AS_ADMIN_FIRST` and select `Run as administrator`
+1. Right-click on `RUN_ME_AS_ADMIN_FIRST` and select `Run as administrator`.
 
-- Select `Yes` on the UAC prompt
+- Select `Yes` on the UAC prompt.
 
-- This will disable Windows Defender, and stop it from interfering with our work
+- This will disable Windows Defender, and stop it from interfering with our work.
 
 1. In the same `LAB_FILES` folder, double-click on `dc32_workshop_files-part1`. This is actually a `.zip` file.
 
-1. Select both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder and drag them to the desktop
+1. Select both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder and drag them to the desktop.
 
 - Once you drag the files to the desktop, Windows will prompt you for the zip archive password.
 
 1. Enter the archive password: `dc32workshop`
 
-1. Close the zip archive window to return to the Desktop
+1. Close the zip archive window to return to the Desktop.
 
 You should now have both the `lb3builder_2024_08_08.gar` file and `LBLeak` folder on your desktop. Once you have these, you are ready to begin!
 
@@ -45,20 +45,20 @@ You should now have both the `lb3builder_2024_08_08.gar` file and `LBLeak` folde
 
 In this section, we're going to open and configure as required for the workshop.
 
-1. Double-click the `ghidra_11.1.1_PUBLIC` folder on the desktop
-1. Double-click the `ghidra_Run` .batch script in this folder
-1. Choose `I Agree` to continue executing Ghidra
- - Once Ghidra opens, you'll be prompted with the `Tip of the Day` window
-1. Click the `Close` button on the tips window to close it
-1. Open the provided Ghidra project by choosing `File > Restore Project...`
+1. Double-click the `ghidra_11.1.1_PUBLIC` folder on the desktop.
+1. Double-click the `ghidra_Run` .batch script in this folder.
+1. Choose `I Agree` to continue executing Ghidra.
+ - Once Ghidra opens, you'll be prompted with the `Tip of the Day` window.
+1. Click the `Close` button on the tips window to close it.
+1. Open the provided Ghidra project by choosing `File > Restore Project...`:
     1. For the `Archive File`, navigate to `C:\Users\pslearner\Desktop\` and select the `lb3builder_2024_08_08.gar` project
-1. Click `OK` to import the project
-1. Double-click on the `builder.exe` file in the recently-opened project
-1. Select the `Edit` menu and select `Tool Options`
-1. From the left-hand nav menu, expand `Listing Fields`
-1. Choose `Cursor text highlight` in this menu
-1. Change the `Mouse button the activate` from `MIDDLE` -> `LEFT`
-1. Press `OK` to save your settings
+1. Click `OK` to import the project.
+1. Double-click on the `builder.exe` file in the recently-opened project.
+1. Select the `Edit` menu and select `Tool Options`.
+1. From the left-hand nav menu, expand `Listing Fields`.
+1. Choose `Cursor text highlight` in this menu.
+1. Change the `Mouse button the activate` from `MIDDLE` -> `LEFT`.
+1. Press `OK` to save your settings.
 
     The above steps walk you through opening the provided (and commented!) project and set the left-click option to highlight variables throughout the code.
 
@@ -170,7 +170,7 @@ To begin:
     
     1. `-pass`: We're going to generate a passcode required to run the compiled ransomware binary.
     
-    1. `-pubkey pub.key`: We're going to use a pre-generate key called `pub.key`
+    1. `-pubkey pub.key`: We're going to use a pre-generated key called `pub.key`.
     
     1. `-config config.json`: We're going to use the `config.json` configuratoin file.
     
@@ -284,7 +284,7 @@ All breakpoints have been set!
 
 ## Delete Pre-Existing Files
 
-In Explorer, go to `C:\Users\LegitUser\Desktop\LBLeak\` and delete the following files if they exist:
+In Explorer, go to `C:\Users\pslearner\Desktop\LBLeak\` and delete the following files _if they exist_:
 
 1. `LB3-dc32.exe`
 
