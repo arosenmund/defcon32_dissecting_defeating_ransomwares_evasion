@@ -142,9 +142,17 @@ Let's debug this bad boy!!
 
 ## Configuring the Debugger
 
-1. Double-click `x32dbg.exe` on the Desktop.
+We'll now debug the builder in `x32dbg` in order to follow some of the fun things it does when writing the ransomware binary.
 
-1. Choose `File -> Open` and select `C:\Users\LegitUser\Desktop\LBLeak\builder.exe`.
+To begin:
+
+1. Double-click the `release` folder on the desktop
+
+1. Double-click the `x32` folder
+
+1. Double-click `x32dbg.exe` to execute it.
+
+1. Choose `File -> Open` and select `C:\Users\pslearner\Desktop\LBLeak\builder.exe`.
 
 1. Choose `File -> Change Command Line`.
 
